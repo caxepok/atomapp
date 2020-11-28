@@ -1,0 +1,31 @@
+$color-primary: #00A0E4;
+$color-header: change-color($color-primary, $lightness: 30%, $saturation: 80%);
+$color-separator: change-color($color-primary, $lightness: 90%, $saturation: 10%);
+$color-menu-hover: change-color($color-primary, $lightness: 98%, $saturation: 50%);
+$color-menu-active: change-color($color-primary, $lightness: 96%, $saturation: 50%);
+$color-text: change-color($color-primary, $lightness: 20%, $saturation: 20%);
+$color-secondary: change-color($color-primary, $lightness: 55%, $saturation: 10%);
+$color-success: #7ED321;
+$color-warning: #F5A623;
+$color-danger: #D0021B;
+$br: 3px;
+
+$bold: 700;
+$regular: 400;
+
+$text-size: 13px;
+
+@mixin clear() {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  background: none;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  outline: none;
+  padding: 0;
+  margin: 0;
+}

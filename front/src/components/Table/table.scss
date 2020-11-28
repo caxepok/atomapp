@@ -1,0 +1,48 @@
+@import "src/shared/consts";
+
+.table {
+  > table {
+    border-collapse: collapse;
+    width: 100%;
+    color: $color-text;
+
+    td {
+      padding: 10px 0 10px 20px;
+
+      &:last-child {
+        padding-right: 20px;
+      }
+    }
+
+    thead {
+      > tr > th {
+        font-size: 13px;
+        text-align: left;
+        padding: 12px 0 10px 20px;
+        color: $color-secondary;
+        border-bottom: 2px solid $color-separator;
+      }
+    }
+
+    tr {
+      border-bottom: 1px solid $color-separator;
+
+      &.-clickable {
+        cursor: pointer;
+
+        &:hover {
+          background: $color-menu-hover;
+        }
+
+        &:active {
+          background: $color-menu-active;
+        }
+      }
+
+      &.-selected,
+      &.-selected:hover {
+        background: $color-menu-active;
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+@import "src/shared/consts";
+
+.task-modal {
+  position: relative;
+  width: 600px;
+  margin-bottom: 30px;
+  
+  > .record {
+    position: absolute;
+    top: 100%;
+    margin-top: 28px;
+    margin-left: -3px;
+  }
+}

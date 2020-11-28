@@ -1,0 +1,65 @@
+@import "src/shared/consts";
+
+.record {
+  @include clear();
+  font-family: inherit;
+  color: $color-danger;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  
+  &.-disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+  
+  &-button {
+    width: 36px;
+    height: 36px;
+    border-radius: 50px;
+    border: 1px solid;
+    display: block;
+    margin-right: 10px;
+    position: relative;
+    
+    &:before {
+      content: '';
+      border-radius: 50px;
+      left: 50%;
+      top: 50%;
+      width: 32px;
+      height: 32px;
+      transform: translate(-50%, -50%);
+      background: $color-danger;
+      position: absolute;
+    }
+    
+    &.-stop {
+      background: $color-danger;
+    }
+    
+    &.-stop:before {
+      border-radius: 1px;
+      width: 18px;
+      height: 18px;
+      background: #FFFFFF;
+    }
+  }
+  
+  &.-disabled > &-button {
+    color: $color-secondary;
+    
+    &:before {
+      background: $color-secondary;
+    }
+  }
+  
+  &-time {
+    color: #333;
+  }
+
+  &-time > strong {
+    font-weight: $bold;
+    color: $color-danger;
+  }
+}

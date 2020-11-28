@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Infrastructure\qo1oal4o.fy2~" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.8" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.9" />
+    <PackageReference Include="morelinq" Version="3.3.2" />
+    <PackageReference Include="NAudio" Version="1.10.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
+    <PackageReference Include="Serilog.Sinks.Debug" Version="1.0.1" />
+    <PackageReference Include="Serilog.AspNetCore" Version="3.4.0" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="3.1.0" />
+    <PackageReference Include="NAudio" Version="1.10.0" />
+    <PackageReference Include="NLayer" Version="1.13.0" />
+    <PackageReference Include="NLayer.NAudioSupport" Version="1.1.0" />
+    <PackageReference Include="NAudio.Lame" Version="1.1.6" />
+    <PackageReference Include="Verint.Microsoft.Speech.x64" Version="11.0.7400.348" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.4" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL.Design" Version="1.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\static\css\main.a7c1e656.chunk.css.map" />
+    <None Include="wwwroot\static\js\2.de400e19.chunk.js" />
+    <None Include="wwwroot\static\js\2.de400e19.chunk.js.map" />
+    <None Include="wwwroot\static\js\main.52f1ea51.chunk.js" />
+    <None Include="wwwroot\static\js\main.52f1ea51.chunk.js.map" />
+    <None Include="wwwroot\static\js\runtime-main.6b83c581.js" />
+    <None Include="wwwroot\static\js\runtime-main.6b83c581.js.map" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\atomapp.common\atomapp.common.csproj" />
+  </ItemGroup>
+
+</Project>

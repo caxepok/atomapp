@@ -1,0 +1,65 @@
+@import "src/shared/consts";
+
+.workplaces {
+  &-tree {
+    padding: 0;
+    margin: -10px -10px 0;
+    list-style: none;
+    
+    ul {
+      margin: 0 0 5px 0;
+      padding: 0;
+    }
+  }
+
+  &-link {
+    @include clear();
+    padding: 9px 10px 9px 30px;
+    border-radius: $br;
+    width: 100%;
+    text-align: left;
+    position: relative;
+
+    &:hover {
+      background-color: $color-menu-hover;
+    }
+
+    &:active,
+    &.-selected {
+      background-color: $color-menu-active;
+    }
+    
+    &.-expandable:before {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 0;
+      border: 3px solid transparent;
+      border-left: 5px solid $color-secondary;
+      left: 15px;
+      top: 13px;
+    }
+    
+    &.-expanded:before {
+      border: 3px solid transparent;
+      border-top: 5px solid $color-secondary;
+      margin: 1px 0 0 -1px;
+    }
+  }
+  
+  &-tree ul > li > &-link {
+    padding-left: 50px;
+    
+    &:before {
+      left: 35px;
+    }
+  }
+
+  &-tree ul ul > li > &-link {
+    padding-left: 70px;
+
+    &:before {
+      left: 55px;
+    }
+  }
+}

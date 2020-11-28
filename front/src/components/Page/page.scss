@@ -1,0 +1,31 @@
+@import "src/shared/consts";
+
+.page {
+  &-loader {
+    width: 100%;
+    left: 0;
+    top: 0;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    > h1 {
+      font-size: 18px;
+      color: $color-secondary;
+      text-align: center;
+    }
+  }
+
+  &-message {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    max-width: 300px;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: $color-secondary;
+  }
+  
+}

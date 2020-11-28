@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<grammar version="1.0" xml:lang="ru-RU"
+         xmlns="http://www.w3.org/2001/06/grammar"
+         tag-format="semantics/1.0"
+         xmlns:sapi="http://schemas.microsoft.com/Speech/2002/06/SRGSExtensions">
+
+  <rule id="Ordinal_1_to_19" scope="public">
+    <example> первое </example>
+    <example> третье </example>
+    <one-of>
+      <item>
+        первое <tag> out._value = 1; </tag>
+      </item>
+      <item>
+        второе <tag> out._value = 2; </tag>
+      </item>
+      <item>
+        третье <tag> out._value = 3; </tag>
+      </item>
+      <item>
+        четвертое <tag> out._value = 4; </tag>
+      </item>
+      <item>
+        пятое <tag> out._value = 5; </tag>
+      </item>
+      <item>
+        шестое <tag> out._value = 6; </tag>
+      </item>
+      <item>
+        седьмое <tag> out._value = 7; </tag>
+      </item>
+      <item>
+        восьмое <tag> out._value = 8; </tag>
+      </item>
+      <item>
+        девятое <tag> out._value = 9; </tag>
+      </item>
+      <item>
+        десятое <tag> out._value = 10; </tag>
+      </item>
+      <item>
+        одинадцатое <tag> out._value = 11; </tag>
+      </item>
+      <item>
+        двенадцатое <tag> out._value = 12; </tag>
+      </item>
+      <item>
+        тринадцатое <tag> out._value = 13; </tag>
+      </item>
+      <item>
+        четырнадцатое <tag> out._value = 14; </tag>
+      </item>
+      <item>
+        пятнадцатое <tag> out._value = 15; </tag>
+      </item>
+      <item>
+        шестнадцатое <tag> out._value = 16; </tag>
+      </item>
+      <item>
+        семнадцатое <tag> out._value = 17; </tag>
+      </item>
+      <item>
+        восемнадцатое <tag> out._value = 18; </tag>
+      </item>
+      <item>
+        девятнадцатое <tag> out._value = 19; </tag>
+      </item>
+    </one-of>
+  </rule>
+
+  <rule id="Ordinal_20_to_29" scope="public">
+    <example> двадцать </example>
+    <example> двадцать девятое </example>
+    двадцать <tag> out._value = 20; </tag>
+    <item repeat="0-1">
+      <one-of>
+        <item>
+          первое <tag> out._value = 21; </tag>
+        </item>
+        <item>
+          второе <tag> out._value = 22; </tag>
+        </item>
+        <item>
+          третье <tag> out._value = 23; </tag>
+        </item>
+        <item>
+          четвёртое <tag> out._value = 24; </tag>
+        </item>
+        <item>
+          пятое <tag> out._value = 25; </tag>
+        </item>
+        <item>
+          шестое <tag> out._value = 26; </tag>
+        </item>
+        <item>
+          седьмое <tag> out._value = 27; </tag>
+        </item>
+        <item>
+          восьмое <tag> out._value = 28; </tag>
+        </item>
+        <item>
+          девятое <tag> out._value = 29; </tag>
+        </item>
+      </one-of>
+    </item>
+  </rule>
+
+  <rule id="Ordinal_1_to_31" scope="public">
+    <example> first </example>
+    <example> eleventh </example>
+    <example> twenty ninth </example>
+    <one-of>
+      <item>
+        <ruleref uri="#Ordinal_1_to_19" />
+        <tag> out = rules.latest(); </tag>
+      </item>
+      <item>
+        <ruleref uri="#Ordinal_20_to_29" />
+        <tag> out = rules.latest(); </tag>
+      </item>
+      <item>
+        тридцатое
+        <tag> out._value = 30; </tag>
+      </item>
+      <item>
+        тридцать первое
+        <tag> out._value = 31; </tag>
+      </item>
+    </one-of>
+  </rule>
+
+  <rule id="Month" scope="public">
+    <example> января </example>
+    <example> декабря </example>
+    <one-of>
+      <item>
+        января <tag> out._value = 1; </tag>
+      </item>
+      <item>
+        февраля <tag> out._value = 2; </tag>
+      </item>
+      <item>
+        марта <tag> out._value = 3; </tag>
+      </item>
+      <item>
+        апреля <tag> out._value = 4; </tag>
+      </item>
+      <item>
+        мая <tag> out._value = 5; </tag>
+      </item>
+      <item>
+        июня <tag> out._value = 6; </tag>
+      </item>
+      <item>
+        июля <tag> out._value = 7; </tag>
+      </item>
+      <item>
+        августа <tag> out._value = 8; </tag>
+      </item>
+      <item>
+        сентября <tag> out._value = 9; </tag>
+      </item>
+      <item>
+        октября <tag> out._value = 10; </tag>
+      </item>
+      <item>
+        ноября <tag> out._value = 11; </tag>
+      </item>
+      <item>
+        декабря <tag> out._value = 12; </tag>
+      </item>
+    </one-of>
+  </rule>
+
+  <rule id="Date_Day_Month" scope="public">
+    <example> первое января</example>
+    <!--<item repeat="0-1">
+      <ruleref uri="#Date_Weekday" />
+    </item>-->
+    <ruleref uri="#Ordinal_1_to_31" />
+    <tag>
+      out.Day._value = rules.latest()._value; 
+    </tag>
+    <ruleref uri="#Month" />
+    <tag>
+      out.Month._value = rules.latest()._value;
+    </tag>
+  </rule>
+
+  <rule id="Confirmation" scope="public">
+    <example> да </example>
+    <example> нет </example>
+    <example> отмена </example>
+    <one-of>
+      <item>
+        <ruleref uri="#Confirmation_Yes" />
+      </item>
+      <item>
+        <ruleref uri="#Confirmation_No" />
+      </item>
+      <item>
+        <ruleref uri="#Confirmation_Cancel" />
+      </item>
+    </one-of>
+    <tag> out = rules.latest() </tag>
+  </rule>
+
+  <rule id="Confirmation_YesNo" scope="public">
+    <example> да </example>
+    <example> нет </example>
+    <one-of>
+      <item>
+        <ruleref uri="#Confirmation_Yes" />
+      </item>
+      <item>
+        <ruleref uri="#Confirmation_No" />
+      </item>
+    </one-of>
+    <tag> out = rules.latest() </tag>
+  </rule>
+
+  <rule id="Confirmation_Yes" scope="public">
+    <example> да </example>
+    <example> конечно </example>
+    <one-of>
+      <item> да </item>
+      <item> конечно </item>
+    </one-of>
+    <tag> out._value = "Yes";</tag>
+  </rule>
+
+  <rule id="Confirmation_No" scope="public">
+    <example> нет </example>
+    <example> не надо </example>
+    <one-of>
+      <item> нет </item>
+      <item> не надо </item>
+    </one-of>
+    <tag> out._value = "No"; </tag>
+  </rule>
+
+  <rule id="Confirmation_Cancel" scope="public">
+    <example> отмена </example>
+    <example> стоп </example>
+    <one-of>
+      <item> отмена </item>
+      <item> стоп </item>
+    </one-of>
+    <tag> out._value = "Cancel"; </tag>
+  </rule>
+
+</grammar>

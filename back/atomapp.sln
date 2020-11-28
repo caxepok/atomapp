@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30711.63
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "atomapp.Android", "atomapp\atomapp.Android\atomapp.Android.csproj", "{3BC5B9DF-5505-4DFA-8AA9-F10220E29706}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "atomapp", "atomapp\atomapp\atomapp.csproj", "{16E8EE24-4624-49F2-AA8E-631544A3BAE7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "atomapp.api", "atomapp.api\atomapp.api.csproj", "{99CAAC44-0D45-44FE-AA88-E0D609C61E7F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{290E61DA-7F27-4533-9B47-FAA8FCC58CB4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "grammars", "grammars", "{16E82E5D-F534-47EB-AD98-2EF9C5AC033E}"
+	ProjectSection(SolutionItems) = preProject
+		grammars\gramar-catalogue.xml = grammars\gramar-catalogue.xml
+		grammars\gramar-tasks.xml = grammars\gramar-tasks.xml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "atomapp.common", "atomapp.common\atomapp.common.csproj", "{5361059B-646E-4A6F-8207-4F4A7DD2C471}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3BC5B9DF-5505-4DFA-8AA9-F10220E29706}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BC5B9DF-5505-4DFA-8AA9-F10220E29706}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BC5B9DF-5505-4DFA-8AA9-F10220E29706}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{3BC5B9DF-5505-4DFA-8AA9-F10220E29706}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BC5B9DF-5505-4DFA-8AA9-F10220E29706}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BC5B9DF-5505-4DFA-8AA9-F10220E29706}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{16E8EE24-4624-49F2-AA8E-631544A3BAE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16E8EE24-4624-49F2-AA8E-631544A3BAE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16E8EE24-4624-49F2-AA8E-631544A3BAE7}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{16E8EE24-4624-49F2-AA8E-631544A3BAE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16E8EE24-4624-49F2-AA8E-631544A3BAE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16E8EE24-4624-49F2-AA8E-631544A3BAE7}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{99CAAC44-0D45-44FE-AA88-E0D609C61E7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99CAAC44-0D45-44FE-AA88-E0D609C61E7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99CAAC44-0D45-44FE-AA88-E0D609C61E7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99CAAC44-0D45-44FE-AA88-E0D609C61E7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5361059B-646E-4A6F-8207-4F4A7DD2C471}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5361059B-646E-4A6F-8207-4F4A7DD2C471}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5361059B-646E-4A6F-8207-4F4A7DD2C471}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5361059B-646E-4A6F-8207-4F4A7DD2C471}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{16E82E5D-F534-47EB-AD98-2EF9C5AC033E} = {290E61DA-7F27-4533-9B47-FAA8FCC58CB4}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6B5BE75A-5CAD-4584-A6F5-DE6B89775F5B}
+	EndGlobalSection
+EndGlobal

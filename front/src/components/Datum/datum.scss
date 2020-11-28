@@ -1,0 +1,90 @@
+@import "src/shared/consts";
+
+.datum {
+  margin: 20px 0 0 0;
+
+  > dt {
+    position: absolute;
+    color: $color-secondary;
+    font-weight: $bold;
+    max-width: 130px;
+    margin: 0 0 3px 0;
+    line-height: 18px;
+  }
+  
+  > dd {
+    padding-left: 120px;
+    margin: 0 0 3px 0;
+    line-height: 18px;
+  }
+  
+  &.-large > dt {
+    position: relative;
+    max-width: unset;
+    margin-bottom: 5px;
+  }
+  
+  &.-large > dd {
+    padding-left: 0;
+  }
+
+  &-status {
+    display: inline-block;
+    background: rgba($color-separator, 0.5);
+    color: $color-text;
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 12px;
+    line-height: 16px;
+    
+    &.-success {
+      background: $color-success;
+      color: white;
+    }
+    
+    td > & {
+      margin: -3px -5px;
+    }
+  }
+  
+  &-priority {
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    border-radius: 20px;
+    margin: 0 -3px;
+    background: $color-separator;
+    
+    &.-type0 {
+      background: $color-success;
+    }
+
+    &.-type1 {
+      background: $color-warning;
+    }
+
+    &.-type2 {
+      background: $color-danger;
+    }
+  }
+  
+  &-comment {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 10px 0 15px 0 !important;
+    border-top: 1px solid $color-separator;
+    padding-top: 7px;
+    
+    &-person,
+    &-date {
+      color: $color-secondary;
+      font-size: 12px;
+    }
+    
+    &-text {
+      flex-basis: 100%;
+      margin-top: 2px;
+    }
+  }
+}
