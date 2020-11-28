@@ -20,6 +20,7 @@ const TaskDetails = function () {
   const userId = useSelector(({ user }) => user.id)
   const data = details || {}
   const [ comment, setComment] = useState('')
+  const [ isDisabled, setDisabled ] = useState(false)
   const { addToast } = useToasts()
   
   useEffect(function () {
@@ -28,10 +29,13 @@ const TaskDetails = function () {
   
   const handleSendComment = async function () {
     try {
+      setDisabled(true)
       const data = await sendComment(userId, id, comment)
       dispatch(addComment(data))
       setComment('')
+      setDisabled(false)
     } catch {
+      setDisabled(false)
       addToast('Не удалось отправить комментарий', {
         appearance: 'error',
         autoDismissTimeout: 3000,
@@ -42,12 +46,15 @@ const TaskDetails = function () {
   
   const handleFinishTask = async function () {
     try {
+      setDisabled(true)
       const data = await finishTask(userId, id, comment)
       const tasks = await fetchTasks(userId, match.params.page)
       dispatch(setTaskDetails(data))
       dispatch(setTasks(match.params.page, tasks))
       setComment('')
+      setDisabled(false)
     } catch {
+      setDisabled(false)
       addToast('Не удалось отправить комментарий', {
         appearance: 'error',
         autoDismissTimeout: 3000,
@@ -122,24 +129,25 @@ const TaskDetails = function () {
       {data.comments && data.comments.map(comment => 
         <DatumComment {...comment} key={comment.id}/>
       )}
-      {data.finishCommend && <DatumComment {...data.finishCommend} />}
+      {data.finishComment && <DatumComment text={data.finishComment} />}
       <dd>
         <Textarea 
           placeholder='Добавить комментарий' 
           style={{ marginBottom: '5px'}}
           value={comment}
           onChange={e => setComment(e.currentTarget.value)}
+          disabled={isDisabled}
         />
         <Button 
           light 
           onClick={handleSendComment}
-          disabled={!comment}
+          disabled={!comment || isDisabled}
         >
           Отправить
         </Button>
         <Button
           onClick={handleFinishTask}
-          disabled={data.isFinished}
+          disabled={data.isFinished || isDisabled}
         >
           Завершить задачу
         </Button>

@@ -6,8 +6,8 @@ const DatumComment = function (props) {
   const { creatorName, addedAt, text } = props 
   
   return <dd className='datum-comment'>
-    <span className='datum-comment-person'>{creatorName}</span>
-    <span className='datum-comment-date'>{getFormattedDate(addedAt)}</span>
+    {creatorName && <span className='datum-comment-person'>{creatorName}</span> }
+    {addedAt && <span className='datum-comment-date'>{getFormattedDate(addedAt)}</span>}
     <span className='datum-comment-text'>{text}</span>
   </dd>
 }

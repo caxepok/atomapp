@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import classes from 'classnames'
 import './record.scss'
-import { uploadVoice } from '../../services/task'
-import { setTask } from '../../reducers/data'
 
 let startTime = 0
 let chunks = []
@@ -32,7 +30,7 @@ const RecordButton = function (props) {
 
         setRecorder(recorder)
       })
-  }, [])
+  })
 
   const handleVoiceRecording = function () {
     if (recorder) {
