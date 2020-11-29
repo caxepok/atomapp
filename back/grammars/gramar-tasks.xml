@@ -46,30 +46,21 @@
       </item>
       <!-- отправка коментария -->
       <item>
-        Добавить коментарий к задаче<tag>out.action="AddComment"</tag>
+        Добавить к задаче<tag>out.action="AddComment"</tag>
         <item repeat="0-1">номер</item>
+        <!-- это можно свернуть в одно правило, но нет времени -->
         <one-of>
-          <item>
-            <ruleref uri="#Cardinal_1_to_19"/>
-            <tag>out.taskId = rules.latest()</tag>
-          </item>
-          <item>
-            <ruleref uri="#Cardinal_20_to_29"/>
-            <tag>out.taskId = rules.latest()</tag>
-          </item>
-          <item>
-            <ruleref uri="#Cardinal_30_to_39"/>
-            <tag>out.taskId = rules.latest()</tag>
-          </item>
-          <item>
-            <ruleref uri="#Cardinal_40_to_49"/>
-            <tag>out.taskId = rules.latest()</tag>
-          </item>
-          <item>
-            <ruleref uri="#Cardinal_50_to_59"/>
-            <tag>out.taskId = rules.latest()</tag>
-          </item>
+          <item><ruleref uri="#Cardinal_1_to_19"/><tag>out.taskId = rules.latest()</tag></item>
+          <item><ruleref uri="#Cardinal_20_to_29"/><tag>out.taskId = rules.latest()</tag></item>
+          <item><ruleref uri="#Cardinal_30_to_39"/><tag>out.taskId = rules.latest()</tag></item>
+          <item><ruleref uri="#Cardinal_40_to_49"/><tag>out.taskId = rules.latest()</tag></item>
+          <item><ruleref uri="#Cardinal_50_to_59"/><tag>out.taskId = rules.latest()</tag></item>
+          <item><ruleref uri="#Cardinal_60_to_69"/><tag>out.taskId = rules.latest()</tag></item>
+          <item><ruleref uri="#Cardinal_70_to_79"/><tag>out.taskId = rules.latest()</tag></item>
+          <item><ruleref uri="#Cardinal_80_to_89"/><tag>out.taskId = rules.latest()</tag></item>
+          <item><ruleref uri="#Cardinal_90_to_99"/><tag>out.taskId = rules.latest()</tag></item>
         </one-of>
+        коментарий
         <item>
           <ruleref special="GARBAGE"/>
         </item>
@@ -78,53 +69,20 @@
       <item>
         Закрыть задачу <tag>out.action="FinishTask"</tag>
         <item repeat="0-1">номер</item>
+        <!-- это можно свернуть в одно правило, но нет времени -->
         <one-of>
-          <item>
-            <ruleref uri="#Cardinal_1_to_19"/>
-            <tag>out.taskId = rules.latest()</tag>
-          </item>
-          <item>
-            <ruleref uri="#Cardinal_20_to_29"/>
-            <tag>out.taskId = rules.latest()</tag>
-          </item>
-          <item>
-            <ruleref uri="#Cardinal_30_to_39"/>
-            <tag>out.taskId = rules.latest()</tag>
-          </item>
-          <item>
-            <ruleref uri="#Cardinal_40_to_49"/>
-            <tag>out.taskId = rules.latest()</tag>
-          </item>
-          <item>
-            <ruleref uri="#Cardinal_50_to_59"/>
-            <tag>out.taskId = rules.latest()</tag>
-          </item>
+          <item><ruleref uri="#Cardinal_1_to_19"/><tag>out.taskId = rules.latest()</tag></item>
+          <item><ruleref uri="#Cardinal_20_to_29"/><tag>out.taskId = rules.latest()</tag></item>
+          <item><ruleref uri="#Cardinal_30_to_39"/><tag>out.taskId = rules.latest()</tag></item>
+          <item><ruleref uri="#Cardinal_40_to_49"/><tag>out.taskId = rules.latest()</tag></item>
+          <item><ruleref uri="#Cardinal_50_to_59"/><tag>out.taskId = rules.latest()</tag></item>
+          <item><ruleref uri="#Cardinal_60_to_69"/><tag>out.taskId = rules.latest()</tag></item>
+          <item><ruleref uri="#Cardinal_70_to_79"/><tag>out.taskId = rules.latest()</tag></item>
+          <item><ruleref uri="#Cardinal_80_to_89"/><tag>out.taskId = rules.latest()</tag></item>
+          <item><ruleref uri="#Cardinal_90_to_99"/><tag>out.taskId = rules.latest()</tag></item>
         </one-of>
-        с коментарием<tag>out.withComment="set"</tag>
-        <item>
-          <ruleref special="GARBAGE"/>
-        </item>
-      </item>
-      <!-- бизнес процесс перевозки контейнера -->
-      <item>
-        Создать задачу на перевозку <tag>out.action="BusinessProcess-Move"</tag>
-        <item>
-          <ruleref uri="#TaskObject"/>
-          <tag>out.taskId = rules.latest()</tag>
-        </item>
-        <item>
-          <ruleref uri="#Workplace"/>
-          <tag>out.taskId = rules.latest()</tag>
-        </item>
-        <item>
-          <ruleref uri="#Workplace"/>
-          <tag>out.taskId = rules.latest()</tag>
-        </item>
-        Срок исполнения <tag>out.finishAt = "set"</tag>
-        <item>
-          <ruleref uri="#Date_Day_Month"/>
-          <tag>out.date = rules.latest()</tag>
-        </item>
+        <item repeat="0-1">с коментарием<tag>out.withComment="set"</tag></item>
+        <item><ruleref special="GARBAGE"/></item>
       </item>
     </one-of>
   </rule>
@@ -214,23 +172,6 @@
       </item>
       <item>
         высокая <tag> out._value = "High" </tag>
-      </item>
-    </one-of>
-  </rule>
-
-  <rule id="Workplace" scope="private">
-    <one-of>
-      <item>
-        Прокатный корпус <tag> out._value = "Прокатный корпус" </tag>
-      </item>
-      <item>
-        Плавильный корпус <tag> out._value = "Плавильный корпус" </tag>
-      </item>
-      <item>
-        Корпус деионизации <tag> out._value = "Корпус деионизации" </tag>
-      </item>
-      <item>
-        Корпус компрессии <tag> out._value = "Корпус компрессии" </tag>
       </item>
     </one-of>
   </rule>
@@ -688,4 +629,145 @@
       </one-of>
     </item>
   </rule>
+  
+  <rule id="Cardinal_60_to_69" scope="public">
+    шестьдесят <tag> out._value = 60; </tag>
+    <item repeat="0-1">
+      <one-of>
+        <item>
+          один <tag> out._value = 61; </tag>
+        </item>
+        <item>
+          два <tag> out._value = 62; </tag>
+        </item>
+        <item>
+          три <tag> out._value = 63; </tag>
+        </item>
+        <item>
+          четыре <tag> out._value = 64; </tag>
+        </item>
+        <item>
+          пять <tag> out._value = 65; </tag>
+        </item>
+        <item>
+          шесть <tag> out._value = 66; </tag>
+        </item>
+        <item>
+          семь <tag> out._value = 67; </tag>
+        </item>
+        <item>
+          восемь <tag> out._value = 68; </tag>
+        </item>
+        <item>
+          девять <tag> out._value = 69; </tag>
+        </item>
+      </one-of>
+    </item>
+  </rule>
+
+  <rule id="Cardinal_70_to_79" scope="public">
+    семьдесят <tag> out._value = 70; </tag>
+    <item repeat="0-1">
+      <one-of>
+        <item>
+          один <tag> out._value = 71; </tag>
+        </item>
+        <item>
+          два <tag> out._value = 72; </tag>
+        </item>
+        <item>
+          три <tag> out._value = 73; </tag>
+        </item>
+        <item>
+          четыре <tag> out._value = 74; </tag>
+        </item>
+        <item>
+          пять <tag> out._value = 75; </tag>
+        </item>
+        <item>
+          шесть <tag> out._value = 76; </tag>
+        </item>
+        <item>
+          семь <tag> out._value = 77; </tag>
+        </item>
+        <item>
+          восемь <tag> out._value = 78; </tag>
+        </item>
+        <item>
+          девять <tag> out._value = 79; </tag>
+        </item>
+      </one-of>
+    </item>
+  </rule>
+
+  <rule id="Cardinal_80_to_89" scope="public">
+    восемьдесят <tag> out._value = 80; </tag>
+    <item repeat="0-1">
+      <one-of>
+        <item>
+          один <tag> out._value = 81; </tag>
+        </item>
+        <item>
+          два <tag> out._value = 82; </tag>
+        </item>
+        <item>
+          три <tag> out._value = 83; </tag>
+        </item>
+        <item>
+          четыре <tag> out._value = 84; </tag>
+        </item>
+        <item>
+          пять <tag> out._value = 85; </tag>
+        </item>
+        <item>
+          шесть <tag> out._value = 86; </tag>
+        </item>
+        <item>
+          семь <tag> out._value = 87; </tag>
+        </item>
+        <item>
+          восемь <tag> out._value = 88; </tag>
+        </item>
+        <item>
+          девять <tag> out._value = 89; </tag>
+        </item>
+      </one-of>
+    </item>
+  </rule>
+
+  <rule id="Cardinal_90_to_99" scope="public">
+    девяносто <tag> out._value = 90; </tag>
+    <item repeat="0-1">
+      <one-of>
+        <item>
+          один <tag> out._value = 91; </tag>
+        </item>
+        <item>
+          два <tag> out._value = 92; </tag>
+        </item>
+        <item>
+          три <tag> out._value = 93; </tag>
+        </item>
+        <item>
+          четыре <tag> out._value = 94; </tag>
+        </item>
+        <item>
+          пять <tag> out._value = 95; </tag>
+        </item>
+        <item>
+          шесть <tag> out._value = 96; </tag>
+        </item>
+        <item>
+          семь <tag> out._value = 97; </tag>
+        </item>
+        <item>
+          восемь <tag> out._value = 98; </tag>
+        </item>
+        <item>
+          девять <tag> out._value = 99; </tag>
+        </item>
+      </one-of>
+    </item>
+  </rule>
+
 </grammar>

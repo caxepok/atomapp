@@ -1,4 +1,5 @@
 ﻿using atomapp.api.Infrastructure;
+using atomapp.api.Models.API;
 using atomapp.api.Models.Database;
 using atomapp.api.Services.Interfaces;
 using atomapp.common.Enums;
@@ -22,7 +23,7 @@ namespace atomapp.api.Services
             _logger = logger;
             _db = db;
 
-            // никогда так не делайте
+            // вселенная, прости меня за такое (:
             FillDatabaseWithPredefinedValues().Wait();
         }
 
@@ -30,6 +31,7 @@ namespace atomapp.api.Services
         {
             return _db.Workers.Where(_ => _.WorkplaceId == id);
         }
+
         public IEnumerable<Worker> GetWorkers()
         {
             return _db.Workers;
@@ -50,18 +52,41 @@ namespace atomapp.api.Services
             return mySubs;
         }
 
-        public async Task<IEnumerable<Workplace>> GetWorkplaces()
+        public Summary GetSummary(long userId)
         {
-            var workplaces = _db.Workplaces.Where(_ => _.ParentId == null).OrderBy(_ => _.Name).ToList();
+            var now = DateTimeOffset.Now;
+            var subs = GetSubordinates(userId);
+            List<SummaryItem> data = new List<SummaryItem>(subs.Count());
+            foreach (var sub in subs)
+            {
+                var tasks = _db.Tsks.Where(_ => _.ExecutorId == sub.Id).ToList();
+                var summaryItem = new SummaryItem()
+                {
+                    Worker = sub,
+                    Active = tasks.Count(_ => _.IsFinished == false),
+                    Completed = tasks.Count(_ => _.IsFinished == true),
+                    Outdate = tasks.Count(_ => _.IsFinished == false && _.PlannedAt < now)
+                };
+                data.Add(summaryItem);
+            }
+            return new Summary() { Data = data };
+        }
+
+        public IEnumerable<Workplace> GetWorkplaces()
+        {
+            var workplaces = _db.Workplaces.Where(_ => _.ParentId == null).OrderBy(_ => _.Id).ToList();
             foreach (var workplace in workplaces)
                 GetChildren(workplace);
 
             return workplaces;
         }
 
+        /// <summary>
+        /// Наполняет дочерними записями родительскую запись
+        /// </summary>
         private void GetChildren(Workplace parent)
         {
-            parent.Children = _db.Workplaces.Where(_ => _.ParentId == parent.Id).OrderBy(_ => _.Name).ToList();
+            parent.Children = _db.Workplaces.Where(_ => _.ParentId == parent.Id).OrderBy(_ => _.Id).ToList();
             foreach (var workplace in parent.Children)
                 GetChildren(workplace);
         }
@@ -84,6 +109,7 @@ namespace atomapp.api.Services
 
         /// <summary>
         /// Заполнение базы оргструктурой и пользователями
+        /// В реале это должно подтягиваться из систем предприятия
         /// </summary>
         private async Task FillDatabaseWithPredefinedValues()
         {
@@ -98,7 +124,7 @@ namespace atomapp.api.Services
                 _db.Workplaces.Add(ceh3);
                 await _db.SaveChangesAsync();
 
-                var korpus1с1 = new Workplace() { Name = "Прокатный корпус", ParentId = ceh1.Id };
+                var korpus1с1 = new Workplace() { Name = "Корпус подготовки сырья", ParentId = ceh1.Id };
                 var korpus2с1 = new Workplace() { Name = "Плавильный корпус", ParentId = ceh1.Id };
                 var korpus1с2 = new Workplace() { Name = "Корпус деионизации", ParentId = ceh1.Id };
                 var korpus2с2 = new Workplace() { Name = "Корпус компрессии", ParentId = ceh1.Id };

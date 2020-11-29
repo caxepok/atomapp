@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -17,21 +18,23 @@ namespace atomapp.ViewModels
         private IApiService _apiService;
 
         private List<Tsk> _myTasks;
+        public List<Tsk> MyTasks { get => _myTasks; set => SetProperty(ref _myTasks, value); }
 
         public MakeRecordPageViewModel(IApiService recordApiService)
         {
             StartRecordCommand = new Command(OnStartRecord);
             StopRecordCommand = new Command(OnStopRecord);
+            RefreshCommand = new Command(OnRefresh);
 
             _apiService = recordApiService;
 
+            Task.Run(() => LoadMyTasks()); 
         }
 
         public async Task LoadMyTasks()
         {
-            _apiService.GetMyTasks(9);
+            MyTasks = (await _apiService.GetMyTasks(9)).ToList();
         }
-
 
         public async Task<PermissionStatus> CheckAndRequestLocationPermission()
         {
@@ -57,6 +60,7 @@ namespace atomapp.ViewModels
 
         public Command StartRecordCommand { get; }
         public Command StopRecordCommand { get; }
+        public Command RefreshCommand { get; }
 
         private async void OnStopRecord()
         {
@@ -99,6 +103,11 @@ namespace atomapp.ViewModels
                 Debug.WriteLine(ex);
                 Console.Out.WriteLine(ex.StackTrace);
             }
-}
+        }
+
+        private async void OnRefresh()
+        {
+            await LoadMyTasks();
+        }
     }
 }

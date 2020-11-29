@@ -3,19 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="atomapp.Views.MakeRecordPage"
              Shell.PresentationMode="ModalAnimated"
-             Title="New Item"
+             Title="Мои задачи"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              ios:Page.UseSafeArea="true">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Margin="10">
             <Button Text="Запись" Command="{Binding StartRecordCommand}" Background="Red" HorizontalOptions="FillAndExpand"/>
             <Button Text="Остановить" Command="{Binding StopRecordCommand}" Background="Green" HorizontalOptions="FillAndExpand"/>
-        </StackLayout>
-        <StackLayout>
-            <Label>Мои задачи</Label>
-            <ItemsView>
-                
-            </ItemsView>
+        
+            <Label Margin="0,10,0,10">Входящие</Label>
+            <Button Text="Обновить" Command="{Binding RefreshCommand}" HorizontalOptions="FillAndExpand"/>
+            <ListView ItemsSource="{Binding MyTasks, Mode=OneWay}" BackgroundColor="Transparent"
+                      HasUnevenRows="True" SelectionMode="None" SeparatorVisibility="None" Margin="0,6">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text=""/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
     

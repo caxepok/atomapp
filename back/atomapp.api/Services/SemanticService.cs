@@ -134,13 +134,30 @@ namespace atomapp.api.Services
         private string ExtractComment(RecognizedSemantics rs)
         {
             int idx = rs.Raw.IndexOf("комментарием");
-            if (idx == -1)
-                idx = rs.Raw.IndexOf("комментарий");
-
             if (idx != -1)
-                return rs.Raw.Substring(idx, rs.Raw.Length - idx);
-            else
-                return rs.Raw;
+            {
+                idx += 12;
+                return rs.Raw[idx..];
+            }
+            idx = rs.Raw.IndexOf("комментарий");
+            if (idx != -1)
+            {
+                idx += 11;
+                return rs.Raw[idx..];
+            }
+            idx = rs.Raw.IndexOf("комментариям");
+            if (idx != -1)
+            {
+                idx += 12;
+                return rs.Raw[idx..];
+            }
+            idx = rs.Raw.IndexOf("комментарии");
+            if (idx != -1)
+            {
+                idx += 11;
+                return rs.Raw[idx..];
+            }
+            return rs.Raw;
         }
 
         /// <summary>
@@ -178,7 +195,7 @@ namespace atomapp.api.Services
                         return TaskClass.Measure;
                     case "Replace":
                         return TaskClass.Replace;
-                    case "Поставить":
+                    case "Install":
                         return TaskClass.Install;
                     default:
                         throw new ApplicationException("Ошибка распознавания типа задачи");

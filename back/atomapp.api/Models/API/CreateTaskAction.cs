@@ -10,6 +10,7 @@ namespace atomapp.api.Models.API
     /// </summary>
     public class MakeTaskAction : TaskActionBase
     {
+        public string Action => "task";
         public IEnumerable<Worker> ExecutorWorkers { get; set; }
         public DateTimeOffset PlannedAt { get; set; }
         public TaskPriority? Priority { get; set; }

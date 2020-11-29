@@ -1,13 +1,8 @@
 ﻿using atomapp.api.Infrastructure;
-using atomapp.api.Services;
 using atomapp.api.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace atomapp.api.Controllers
 {
@@ -26,28 +21,52 @@ namespace atomapp.api.Controllers
             _workplaceService = workplaceService;
         }
 
+        /// <summary>
+        /// Возвращает оргструктуру
+        /// </summary>
         [HttpGet("")]
-        public async Task<IActionResult> Get()
+        public IActionResult Get()
         {
-            return Ok(await _workplaceService.GetWorkplaces());
+            return Ok(_workplaceService.GetWorkplaces());
         }
 
+        /// <summary>
+        /// Возвращает сотрдуников подразделения
+        /// </summary>
+        /// <param name="id">идентификатор подразделения</param>
         [HttpGet("{id}/worker")]
         public IActionResult GetWorkers(long id)
         {
             return Ok(_workplaceService.GetWorkerOfWorkplace(id));
         }
 
+        /// <summary>
+        /// Возвращает список всех сотрудников
+        /// </summary>
         [HttpGet("worker")]
         public IActionResult GetWorkers()
         {
             return Ok(_workplaceService.GetWorkers());
         }
 
+        /// <summary>
+        /// Возвращае всех подчинённых сотрудника
+        /// </summary>
+        /// <param name="userId">идентификатор пользователя</param>
         [HttpGet("worker/subordinates")]
         public IActionResult GetSubordinates(long userId)
         {
             return Ok(_workplaceService.GetSubordinates(userId));
+        }
+
+        /// <summary>
+        /// Возвращает данные для аналитики
+        /// </summary>
+        /// <param name="userId">идентификатор пользователя</param>
+        [HttpGet("worker/summary")]
+        public IActionResult Summary(long userId)
+        {
+            return Ok(_workplaceService.GetSummary(userId));
         }
     }
 }

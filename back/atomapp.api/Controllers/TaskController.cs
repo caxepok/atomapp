@@ -51,7 +51,7 @@ namespace atomapp.api.Controllers
         /// Добавляет коментарий к задаче
         /// </summary>
         /// <param name="id">идентификатор задачи</param>
-        /// <param name="comment">коментарий</param>
+        /// <param name="action">коментарий</param>
         /// <returns></returns>
         [HttpPost("{id}/comment")]
         public IActionResult AddTaskComment(long id, [FromBody] CommentTaskAction action)

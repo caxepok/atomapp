@@ -19,7 +19,7 @@ namespace atomapp.Models
         public DateTimeOffset? FinishedAt { get; set; }
         public bool IsFinished { get; set; }
         public int ExecutionPercent { get; set; }
-        public TaskPriority Priority { get; set; }
+        public int Priority { get; set; }
         public string TaskObject { get; set; }
         public string AudioGuid { get; set; }
         public string FinishCommend { get; set; }

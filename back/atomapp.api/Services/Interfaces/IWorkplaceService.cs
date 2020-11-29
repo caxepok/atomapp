@@ -1,8 +1,6 @@
-﻿using atomapp.api.Models.Database;
-using System;
+﻿using atomapp.api.Models.API;
+using atomapp.api.Models.Database;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace atomapp.api.Services.Interfaces
 {
@@ -11,9 +9,27 @@ namespace atomapp.api.Services.Interfaces
     /// </summary>
     public interface IWorkplaceService
     {
-        Task<IEnumerable<Workplace>> GetWorkplaces();
-        IEnumerable<Worker> GetWorkerOfWorkplace(long id);
+        /// <summary>
+        /// Возвращает иерархию оргструктуры
+        /// </summary>
+        IEnumerable<Workplace> GetWorkplaces();
+        /// <summary>
+        /// Возвращает всех сотрудников
+        /// </summary>
         IEnumerable<Worker> GetWorkers();
+        /// <summary>
+        /// Возвращает сотрудников 
+        /// </summary>
+        IEnumerable<Worker> GetWorkerOfWorkplace(long userId);
+        /// <summary>
+        /// Возвращает подчинённых сотрудника
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         IEnumerable<Worker> GetSubordinates(long userId);
+        /// <summary>
+        /// Возвращает сводную информацию по задачм подчинённых сотрудников
+        /// </summary>
+        Summary GetSummary(long userId);
     }
 }

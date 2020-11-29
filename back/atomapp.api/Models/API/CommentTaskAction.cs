@@ -10,6 +10,7 @@ namespace atomapp.api.Models.API
     /// </summary>
     public class CommentTaskAction : TaskActionBase
     {
+        public string Action => "comment";
         public string Comment { get; set; }
         public long TaskId { get; set; }
     }

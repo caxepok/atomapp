@@ -23,7 +23,7 @@ namespace atomapp.api.Models.Database
         public TaskPriority Priority { get; set; }
         public string TaskObject { get; set; }
         public string AudioGuid { get; set; }
-        public string FinishCommend { get; set; }
+        public string FinishComment { get; set; }
         public string FinishAudioGuid { get; set; }
 
         public virtual Worker Creator { get; set; }

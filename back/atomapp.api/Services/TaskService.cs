@@ -3,6 +3,7 @@ using atomapp.api.Models;
 using atomapp.api.Models.API;
 using atomapp.api.Models.Database;
 using atomapp.api.Services.Interfaces;
+using atomapp.common.Enums;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -76,8 +77,8 @@ namespace atomapp.api.Services
             if (result.RelativeTarget == Executors.AllSub)
                 a.ExecutorWorkers = subordinates;
 
-            int idx = result.Raw.ToLowerInvariant().IndexOf("описание");
-            a.Description = result.Raw.Substring(idx, result.Raw.Length - idx);
+            int idx = result.Raw.IndexOf("описание") + 9;
+            a.Description = result.Raw[idx..];
 
             return a;
         }
@@ -97,7 +98,7 @@ namespace atomapp.api.Services
                     Description = action.Description,
                     ExecutorId = worker.Id,
                     PlannedAt = action.PlannedAt,
-                    Priority = action.Priority ?? Enums.TaskPriority.Medium,
+                    Priority = action.Priority ?? TaskPriority.Medium,
                     TaskObject = action.TaskObject,
                     ParentId = action.ParentId
                 };
@@ -122,7 +123,7 @@ namespace atomapp.api.Services
                 TaskId = taskId ?? result.TaskId.Value,
                 CreatorId = userId,
                 AudioGuid = result.AudioGuid,
-                Comment = result.Raw,
+                Comment = result.Comment,
             };
 
             FinishTask(fta.TaskId, fta);
@@ -136,9 +137,9 @@ namespace atomapp.api.Services
             if (task == null)
                 return;
             task.IsFinished = true;
+            task.FinishComment = action.Comment;
             if (String.IsNullOrEmpty(action.Comment))
             {
-                task.FinishCommend = action.Comment;
                 task.FinishAudioGuid = action.AudioGuid;
             }
             task.ExecutionPercent = 100;
@@ -149,7 +150,6 @@ namespace atomapp.api.Services
         // -- comment
         public CommentTaskAction CreateCommentAction(long userId, long? taskId, RecognizedSemantics result)
         {
-
             if (taskId == null && result.TaskId == null)
                 throw new ApplicationException("Номер задачи для коментирования не распознан");
 
@@ -159,17 +159,16 @@ namespace atomapp.api.Services
             var cta = new CommentTaskAction()
             {
                 CreatorId = userId,
-                Comment = result.Raw,
+                Comment = result.Comment,
                 AudioGuid = result.AudioGuid,
                 TaskId = taskId ?? result.TaskId.Value
             };
-            AddTaskComment(cta.TaskId, cta);
             return cta;
         }
-        public TskComment AddTaskComment(long id, CommentTaskAction action)
+        public TskComment AddTaskComment(long taskId, CommentTaskAction action)
         {
-            _logger.LogInformation($"Adding comment to task: {id}, {action}");
-            var worker = _db.Workers.SingleOrDefault(_ => _.Id == id);
+            _logger.LogInformation("Adding comment to task: {taskId}, {@action}", taskId, action);
+            var worker = _db.Workers.SingleOrDefault(_ => _.Id == action.CreatorId);
 
             TskComment comment = new TskComment()
             {
@@ -178,7 +177,7 @@ namespace atomapp.api.Services
                 CreatorId = action.CreatorId,
                 CreatorName = worker.Name,
                 Text = action.Comment,
-                TskId = id
+                TskId = taskId
             };
             _db.TskComments.Add(comment);
             _db.SaveChanges();
@@ -193,11 +192,11 @@ namespace atomapp.api.Services
         /// <returns></returns>
         private string GenerateTaskName(MakeTaskAction a) => a.TaskClass switch
         {
-            Enums.TaskClass.Knowledge => $"Ознакомиться: {a.TaskObject}",
-            Enums.TaskClass.Check => $"Проверить: {a.TaskObject}",
-            Enums.TaskClass.Measure => $"Измерить: {a.TaskObject}",
-            Enums.TaskClass.Replace => $"Заменить: {a.TaskObject}",
-            Enums.TaskClass.Install => $"Поставить: {a.TaskObject}",
+            TaskClass.Knowledge => $"Ознакомиться: {a.TaskObject}",
+            TaskClass.Check => $"Проверить: {a.TaskObject}",
+            TaskClass.Measure => $"Измерить: {a.TaskObject}",
+            TaskClass.Replace => $"Заменить: {a.TaskObject}",
+            TaskClass.Install => $"Поставить: {a.TaskObject}",
             _ => a.TaskObject,
         };
     }

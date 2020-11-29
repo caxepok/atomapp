@@ -10,6 +10,7 @@ namespace atomapp.api.Models.API
     /// </summary>
     public class FinishTaskAction : TaskActionBase
     {
+        public string Action => "finish";
         public string Comment { get; set; }
         public long TaskId { get; internal set; }
     }

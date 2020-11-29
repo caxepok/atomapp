@@ -16,7 +16,7 @@ namespace atomapp.Views
         public MakeRecordPage()
         {
             InitializeComponent();
-            BindingContext = new MakeRecordPageViewModel(new RecordApiService());
+            BindingContext = new MakeRecordPageViewModel(new ApiService());
         }
     }
 }

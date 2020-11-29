@@ -30,12 +30,6 @@ namespace atomapp.api.Controllers
             _taskService = taskService;
         }
 
-        [HttpGet("ping")]
-        public IActionResult Ping()
-        {
-            return Ok();
-        }
-
         /// <summary>
         /// Метод для симуляции создания задачи для быстрой отладки фронта
         /// </summary>
@@ -66,8 +60,8 @@ namespace atomapp.api.Controllers
         /// Метод отправки звукового фрагмента на распознавание
         /// </summary>
         /// <param name="userId">идентификатор пользователя</param>
+        /// <param name="taskId">идентификатор задания</param>
         /// <param name="parentTaskId">родительская задача</param>
-        /// <param name="files">звуковой файл</param>
         /// <param name="isOpus">признак что файл в формате opus (так его записывает браузер)</param>
         /// <returns></returns>
         [HttpPost("upload")]
