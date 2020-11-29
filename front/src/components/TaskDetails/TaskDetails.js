@@ -9,7 +9,11 @@ import { PageMessage } from '../Page'
 import Datum, { DatumComment, DatumPriority, DatumValue, DatumStatus } from '../Datum'
 import { Loader, Textarea, Button } from '../../shared'
 import { PRIORITIES } from '../../shared/consts'
-import { fetchTasks, finishTask, sendComment } from '../../services/task'
+import {
+  fetchTasks,
+  finishTask,
+  sendComment,
+} from '../../services/task'
 import { useToasts } from 'react-toast-notifications'
 
 const TaskDetails = function () {
@@ -30,7 +34,7 @@ const TaskDetails = function () {
   const handleSendComment = async function () {
     try {
       setDisabled(true)
-      const data = await sendComment(userId, id, comment)
+      const data = await sendComment({ creatorId: userId, taskId: id, comment })
       dispatch(addComment(data))
       setComment('')
       setDisabled(false)
@@ -47,7 +51,7 @@ const TaskDetails = function () {
   const handleFinishTask = async function () {
     try {
       setDisabled(true)
-      const data = await finishTask(userId, id, comment)
+      const data = await finishTask({ creatorId: userId, taskId: id, comment })
       const tasks = await fetchTasks(userId, match.params.page)
       dispatch(setTaskDetails(data))
       dispatch(setTasks(match.params.page, tasks))
@@ -124,7 +128,7 @@ const TaskDetails = function () {
     <Datum label='Описание' large>
       <DatumValue value={data.description} />
     </Datum>
-
+    
     <Datum label='Комментарии' large>
       {data.comments && data.comments.map(comment => 
         <DatumComment {...comment} key={comment.id}/>

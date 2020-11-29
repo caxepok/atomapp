@@ -18,13 +18,34 @@ import {
 } from '../../services/task'
 import './task-modal.scss'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
-import {
-  setTask,
-  getTaskTemplate,
-  setTasks,
-} from '../../reducers/data'
+import { setTask, setTasks } from '../../reducers/data'
 import { useRouteMatch } from 'react-router'
 import { setRedirect } from '../../reducers/layout'
+
+const helpText = `
+Примеры голосового управления задачами
+
+Пример 1:
+«Поставить задачу всем начальникам участка ознакомиться с приказом. Срок исполнения 29 ноября, приоритет высокий. Описание: нам поступил приказ, его нужно донести до всех сотрудников вашего подразделения. Проконтролировать особо людей старше 50 лет.»
+
+Пример 2:
+«Поставить задачу всем начальникам участка измерить расход реагентов. Срок исполнения 5 декабря. Приоритет низкий. Описание: С целью учёта материалов необходимо проверить наличие и количестве реагентов для полимеризации плутония на своих участках. Если их не хватит на половину следующего года - доложить.»
+
+Пример 3:
+«Поставить задачу заменить комплектацию насосного оборудования. Срок исполнения 2 декабря. Описание: С целью обновления парка насосного оборудования провести замену обмоток тяговых насосов в цехе литья алюминия. Обмотки можно выписать в отделе снабжения.»
+
+Пример 4:
+«Поставить задачу всем начальникам участка поставить новогоднюю ёлку. Срок исполнения 31 декабря. Приоритет высокий. Описание: нарядить ее и положить под елку конфеты»
+
+Пример 5:
+«Закрыть задачу 18 с коментарием: Задвижки закрыты, давление 60 атмосфер.»
+
+Пример 6:
+«Закрыть задачу номер 26»
+
+Пример 7:
+«Добавить к задаче номер 34 коментарий: Проконсультируйте на счёт освещения в пятом блоке. Оно тусклое.»
+`
 
 const TaskModal = function () {
   const [ isRecognizing, setRecognizing ] = useState(false)
@@ -93,11 +114,6 @@ const TaskModal = function () {
     }
   }
   
-  const handleLoadTemplate = function (number) {
-    setRecognizing(true)
-    dispatch(getTaskTemplate(number))
-  }
-  
   const handleSaveTask = async function () {
     setSending(true)
 
@@ -108,7 +124,7 @@ const TaskModal = function () {
       setSending(false)
       dispatch(setTasks(page, tasks))
 
-      setTimeout(() => dispatch(setRedirect(page)), 1)
+      setTimeout(() => dispatch(setRedirect('/outbox')), 1)
     } catch {
       addToast('Не удалось сохранить', {
         appearance: 'error',
@@ -122,26 +138,15 @@ const TaskModal = function () {
   
   return <Modal 
     title={data.id ? 'Редактировать задачу' : 'Новая задача'} 
-    buttons={<>
-      <Button small light onClick={() => handleLoadTemplate(1)}>
-        1
-      </Button>
-      <Button small light onClick={() => handleLoadTemplate(2)}>
-        2
-      </Button>
-      <Button small light onClick={() => handleLoadTemplate(3)}>
-        3
-      </Button>
-      <Button 
-        onClick={handleSaveTask} 
-        disabled={
-          isRecognizing || 
-          isSending || 
-          !data.executorWorkers || data.executorWorkers.length === 0
-        }>
-        Сохранить
-      </Button>
-    </>}
+    buttons={<Button 
+      onClick={handleSaveTask} 
+      disabled={
+        isRecognizing || 
+        isSending || 
+        !data.executorWorkers || data.executorWorkers.length === 0
+      }>
+      Сохранить
+    </Button>}
   >
     <div className='task-modal'>
       <div className='form'>
@@ -212,6 +217,11 @@ const TaskModal = function () {
         isDisabled={isRecognizing || isSending}
         isRecognizing={isRecognizing}
       />
+      <div className='task-modal-help'>
+        <Button small light onClick={() => alert(helpText)}>
+          Помощь...
+        </Button>
+      </div>
     </div>
   </Modal>
 }

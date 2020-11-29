@@ -3,7 +3,7 @@ import {
   fetchWorkers,
   fetchWorkplaces,
 } from '../services/workplaces'
-import { fetchTemplate, fetchTasks, fetchTaskDetails } from '../services/task'
+import { fetchTasks, fetchTaskDetails } from '../services/task'
 
 const SET_WORK_PLACES = 'data/SET_WORK_PLACES'
 const SET_USERS = 'data/SET_USERS'
@@ -144,24 +144,6 @@ export const getWorkplaceUsers = function (id, name) {
         type: SET_USERS,
         data: null
       })
-    }
-  }
-}
-
-export const getTaskTemplate = function (number) {
-  return async function (dispatch, getState) {
-    const userId = getState().user && getState().user.id
-    if (!userId) {
-      return 
-    }
-
-    try {
-      const data = await fetchTemplate(userId, number)
-      dispatch(setTask(data))
-    }
-
-    catch (err) {
-      dispatch(setTask())
     }
   }
 }

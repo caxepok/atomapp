@@ -1,5 +1,4 @@
 import React from 'react'
-import { Button } from '../../shared'
 import './page.scss'
 
 export const PageMessage = function (props) {

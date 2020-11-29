@@ -1,0 +1,50 @@
+@import "src/shared/consts";
+
+.play-audio {
+  > button {
+    @include clear();
+    color: $color-primary;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: $bold;
+    padding-right: 27px;
+    position: relative;
+    text-align: left;
+    cursor: pointer;
+    
+    &:before {
+      position: absolute;
+      content: '';
+      width: 20px;
+      height: 20px;
+      background: $color-success;
+      border-radius: 20px;
+      right: 0;
+      top: 5px;
+    }
+    
+    &:after {
+      position: absolute;
+      content: '';
+      width: 0;
+      height: 0;
+      border: 6px solid transparent;
+      border-left: 8px solid #fff;
+      right: -1px;
+      top: 9px;
+    }
+    
+    &.-playing:before {
+      background: $color-danger;
+    }
+    
+    &.-playing:after {
+      border: none;
+      width: 10px;
+      height: 10px;
+      background: #fff;
+      right: 5px;
+      top: 10px;
+    }
+  }
+}

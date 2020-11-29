@@ -8,7 +8,7 @@ let chunks = []
 const RecordButton = function (props) {
   const [ recorder, setRecorder ] = useState(null)
   const [ isRecording, setRecording] = useState(false)
-  const { isRecognizing, isDisabled, onSend } = props 
+  const { isRecognizing, isDisabled, onSend, small } = props 
   const [ time, setTime ] = useState(0)
 
   useEffect(function () {
@@ -20,7 +20,7 @@ const RecordButton = function (props) {
           chunks.push(event.data)
         })
 
-        recorder.addEventListener('stop', async  function () {
+        recorder.addEventListener('stop', function () {
           const audioBlob = new Blob(chunks, {
             type: 'audio/mp3'
           });
@@ -30,9 +30,9 @@ const RecordButton = function (props) {
 
         setRecorder(recorder)
       })
-  })
+  }, [])
 
-  const handleVoiceRecording = function () {
+  const handleVoiceRecording = function (e) {
     if (recorder) {
       if (isRecording) {
         recorder.stop()
@@ -69,12 +69,16 @@ const RecordButton = function (props) {
     }
   }, [isRecording])
   
-  return <button type='button' className={classes('record', isDisabled && '-disabled')} onClick={handleVoiceRecording}>
-      <span className={classes('record-button', isRecording && '-stop')} />
-      <span className='record-time'>
-        { isRecognizing ? 'Распознавание...' : isRecording  ? formatTime(time) : <strong>Запись голоса</strong>}
-      </span>
-    </button>
+  return <button 
+    type='button' 
+    className={classes('record', isDisabled && '-disabled', small && '-small')} 
+    onClick={handleVoiceRecording}
+  >
+    <span className={classes('record-button', isRecording && '-stop')} />
+    <span className='record-time'>
+      { isRecognizing ? 'Распознавание...' : isRecording  ? formatTime(time) : <strong>Запись голоса</strong>}
+    </span>
+  </button>
 }
 
 export default RecordButton

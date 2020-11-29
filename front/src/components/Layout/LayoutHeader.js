@@ -20,7 +20,10 @@ const LayoutHeader = function () {
       userId ? 'Задачи' : 'Авторизация' 
     }</div>
     { userId && <Menu /> }
-    { userId && <Button onClick={handleLogout}>
+    { userId && <Button small light to={'/demo'}>
+      Демо-видео
+    </Button> }
+    { userId && <Button small onClick={handleLogout}>
       Выйти
     </Button>}
   </div>  

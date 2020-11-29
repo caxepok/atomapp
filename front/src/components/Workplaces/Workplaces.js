@@ -18,7 +18,21 @@ const Workplaces = function () {
   if (users === undefined) {
     return <LayoutSection>
       <PageMessage>
-        Выберите подразделение
+        <div style={{ margin: '0 -50px', fontSize: '16px'}}>
+          Для входа выберите слева своё место работы, свою учётную запись и нажмите «Залогиниться».
+        </div>
+        <br/>
+        <br/>
+        <br/>
+        <strong style={{ color: '#000000'}}>Демо-видео:</strong>
+        <div style={{
+          margin: '10px -130px -20px -130px',
+          width: 560,
+          height: 315,
+          background: '#000'
+        }}>
+          <iframe src="https://player.vimeo.com/video/484936329" width="640" height="467" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        </div>
       </PageMessage>
     </LayoutSection>
   }

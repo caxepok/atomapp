@@ -27,7 +27,7 @@ const Authorization = function (props) {
         header={<span>Подразделения</span>}
       >
         <ul className='workplaces-tree'>
-          {workplaces && workplaces.map((item, key) => (
+          {workplaces && workplaces.map((item) => (
             <WorkplacesItem key={item.id} {...item} />
           ))}
         </ul>

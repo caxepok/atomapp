@@ -1,0 +1,16 @@
+.summary {
+  &-images {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    height: 100%;
+    justify-content: space-between;
+    top: 0;
+    width: 80%;
+    left: 10%;
+    
+    > img {
+      max-width: 45%;
+    }
+  }
+}

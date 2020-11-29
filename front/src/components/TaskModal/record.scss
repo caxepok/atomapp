@@ -62,4 +62,22 @@
     font-weight: $bold;
     color: $color-danger;
   }
+  
+  &.-small > &-button {
+    width: 26px;
+    height: 26px;
+    margin-right: 5px;
+    
+    &:before {
+      width: 22px;
+      height: 22px;
+    }
+
+    &.-stop:before {
+      border-radius: 1px;
+      width: 10px;
+      height: 10px;
+      background: #FFFFFF;
+    }
+  }
 }

@@ -77,17 +77,13 @@ export async function fetchTaskDetails (userId, taskId) {
   }
 }
 
-export async function sendComment (userId, taskId, comment) {
-  const response = await fetch(`${DEV_API}/task/${taskId}/comment`, {
+export async function sendComment (data) {
+  const response = await fetch(`${DEV_API}/task/${data.taskId}/comment`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({
-      taskId,
-      creatorId: userId,
-      comment
-    })
+    body: JSON.stringify(data)
   })
 
   if (response.status === 200) {
@@ -97,21 +93,28 @@ export async function sendComment (userId, taskId, comment) {
   }
 }
 
-export async function finishTask (userId, taskId, comment) {
-  const response = await fetch(`${DEV_API}/task/${taskId}/finish`, {
+export async function finishTask (data) {
+  const response = await fetch(`${DEV_API}/task/${data.taskId}/finish`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({
-      taskId,
-      creatorId: userId,
-      comment
-    })
+    body: JSON.stringify(data)
   })
 
   if (response.status === 204) {
-    return await fetchTaskDetails(userId, taskId)
+    return await fetchTaskDetails(data.creatorId, data.taskId)
+  } else {
+    throw Error()
+  }
+}
+
+export async function fetchAudio (guid) {
+  const response = await fetch(`${DEV_API}/record/download/${guid}`, {
+    method: 'GET',
+  })
+  if (response.status === 200) {
+    return await response.blob()
   } else {
     throw Error()
   }

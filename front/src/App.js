@@ -10,8 +10,11 @@ import layoutReducer, { setRedirect } from './reducers/layout'
 import thunk from 'redux-thunk'
 import Inbox from './pages/Inbox'
 import Outbox from './pages/Outbox'
+import Summary from './pages/Summary'
+import Processes from './pages/Processes'
 import Authorization from './components/Authorization'
 import Task from './components/TaskModal'
+import Demo from './pages/Demo'
 
 function App() {
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -42,6 +45,15 @@ function App() {
                   <Route path='/:page/:task?'>
                     <Outbox />
                   </Route>
+                </Route>
+                <Route path='/summary'>
+                  <Summary />
+                </Route>
+                <Route path='/processes'>
+                  <Processes />
+                </Route>
+                <Route path='/demo'>
+                  <Demo />
                 </Route>
                 <Redirect to='/inbox' />
               </Switch>
